@@ -1,0 +1,29 @@
+from ultralytics imprt YOLO
+import cv2
+
+# Cargar el modelo entrenado
+model = YOLO("best.pt")   # Cambia por la ruta a tu modelo
+
+# Abrir la webcam (0 = cámara principal)
+cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print("Error: No se pudo abrir la cámara.")
+    exit()
+
+while True:
+    ret, frame = cap.read()
+
+    if not ret:
+        break
+
+    # Realizar la detección
+    results = model.predict(
+        source=frame,
+        conf=0.25,
+        imgsz=640,
+        verbose=False
+    )
+
+    # Dibujar las detecciones sobre la imagen
+    annotated_frame =
